@@ -1,0 +1,8 @@
+{
+  "inventory.openexchange.main_menu": "OpenEX",
+  "item.openexchange.ipu_fast": "Fast IPU",
+  "item.openexchange.ipu_standard": "Standard IPU",
+  "item.openexchange.item_filter": "Item Filter",
+  "tooltip.openexchange.ipu_name": "Item Processing Unit",
+  "tooltip.openexchangeipu_power_req": "Requires %1$s flux"
+}
