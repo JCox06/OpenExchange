@@ -26,6 +26,7 @@ public class OpenExLangProvider extends LanguageProvider {
         add(ItemProcessingUnit.IPU_NAME_COMPONENT, "Item Processing Unit");
         add(ItemProcessingUnit.EXTRA_POWER_CONSUMPTION_COMPONENT, "Requires %1$s flux");
         add(Registration.ITEM_ITEM_FILTER.get(), "Item Filter");
+        add(Registration.ITEM_FILTERED_STORAGE_UNIT.get(), "Filtered Storage Unit");
 
     }
 }

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "openexchange:block/filtered_storage_unit",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "openexchange:block/filtered_storage_unit",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "openexchange:block/filtered_storage_unit"
+    },
+    "facing=west": {
+      "model": "openexchange:block/filtered_storage_unit",
+      "y": 90
+    }
+  }
+}

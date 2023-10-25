@@ -17,6 +17,7 @@ public class DataGeneration {
         final PackOutput packOutput = generator.getPackOutput();
 
         OpenExchange.LOGGER.info("Starting Generators for CLIENT ASSETS");
+        generator.addProvider(event.includeClient(), new OpenExBlockStateProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeClient(), new OpenExItemModelProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeClient(), new OpenExLangProvider(packOutput, "en_us"));
     }
