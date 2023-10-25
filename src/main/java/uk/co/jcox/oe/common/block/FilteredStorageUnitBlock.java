@@ -1,22 +1,27 @@
 package uk.co.jcox.oe.common.block;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.block.AbstractChestBlock;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.ChestBlock;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import uk.co.jcox.oe.common.block.entity.FilteredStorageUnitBlockEntity;
-import uk.co.jcox.oe.common.setup.Registration;
 
-import java.util.function.Supplier;
-
-public class FilteredStorageUnitBlock extends Block {
+public class FilteredStorageUnitBlock extends Block implements EntityBlock {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
@@ -39,4 +44,29 @@ public class FilteredStorageUnitBlock extends Block {
     }
 
 
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
+        return new FilteredStorageUnitBlockEntity(pos, state);
+    }
+
+
+    @SuppressWarnings("deprecated")
+    @Override
+    public @NotNull InteractionResult use(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult result) {
+
+        if (level.isClientSide()) {
+            return InteractionResult.SUCCESS;
+        }
+
+        BlockEntity be = level.getBlockEntity(pos);
+
+        if (be instanceof FilteredStorageUnitBlockEntity) {
+            NetworkHooks.openScreen((ServerPlayer) player, (MenuProvider) be, be.getBlockPos());
+        } else {
+            throw new IllegalStateException("Filtered Storage container block is missing");
+        }
+
+        return InteractionResult.SUCCESS;
+    }
 }
