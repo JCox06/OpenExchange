@@ -2,8 +2,8 @@ package uk.co.jcox.oe.common.datagen;
 
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
-import net.minecraftforge.registries.RegistryObject;
 import uk.co.jcox.oe.OpenExchange;
+import uk.co.jcox.oe.common.block.entity.FilteredStorageUnitBlockEntity;
 import uk.co.jcox.oe.common.item.ItemProcessingUnit;
 import uk.co.jcox.oe.common.setup.Registration;
 
@@ -17,8 +17,9 @@ public class OpenExLangProvider extends LanguageProvider {
     @Override
     protected void addTranslations() {
 
-        //Main Menu
+        //Menus
         add(Registration.TITLE_MAIN_MENU, "OpenEX");
+        add(FilteredStorageUnitBlockEntity.MENU_DISPLAY_COMPONENT, "Filtered Storage");
 
         //Items
         add(Registration.ITEM_IPU_STANDARD.get(), "Standard IPU");

@@ -3,21 +3,34 @@ package uk.co.jcox.oe.client;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
+import uk.co.jcox.oe.OpenExchange;
 import uk.co.jcox.oe.common.container.FilteredStorageUnitContainer;
 
 public class FilteredStorageUnitScreen extends AbstractContainerScreen<FilteredStorageUnitContainer> {
 
 
-    public FilteredStorageUnitScreen(FilteredStorageUnitContainer p_97741_, Inventory p_97742_, Component p_97743_) {
-        super(p_97741_, p_97742_, p_97743_);
+    private static final ResourceLocation TEXTURE = new ResourceLocation(OpenExchange.MODID, "textures/gui/container/filtered_storage_unit.png");
+
+    public FilteredStorageUnitScreen(FilteredStorageUnitContainer container, Inventory inventory, Component component) {
+        super(container, inventory, component);
+        this.imageWidth = 176;
+        this.imageHeight = 222;
+        this.inventoryLabelX = 7;
+        this.inventoryLabelY = 127;
     }
 
 
     @Override
-    protected void renderBg(@NotNull GuiGraphics graphics, float p_97788_, int p_97789_, int p_97790_) {
-        this.renderBackground(graphics);
+    protected void renderBg(@NotNull GuiGraphics graphics, float partialTicks, int mouseX, int mouseY) {
+
+
+        int x = (this.width - this.imageWidth) / 2;
+        int y = (this.height - this.imageHeight) / 2;
+
+        graphics.blit(TEXTURE, x, y, 0, 0, this.imageWidth, this.imageHeight);
     }
 
 

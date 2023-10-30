@@ -28,7 +28,7 @@ public class FilteredStorageUnitBlockEntity extends BlockEntity implements MenuP
 
 
     public static final int ITEM_SELECT_INV_SIZE = 1;
-    public static final int ITEM_STORE_INV_SIZE = 27;
+    public static final int ITEM_STORE_INV_SIZE = 45;
 
     public static final String NBT_SELECT_INV = "itemSelectInv";
     public static final String NBT_STORE_INV = "itemStorageInv";
@@ -45,14 +45,14 @@ public class FilteredStorageUnitBlockEntity extends BlockEntity implements MenuP
 
 
     @Override
-    protected void saveAdditional(CompoundTag compound) {
+    protected void saveAdditional(@NotNull CompoundTag compound) {
         super.saveAdditional(compound);
         compound.put(NBT_SELECT_INV, itemSelectInventory.serializeNBT());
         compound.put(NBT_STORE_INV, itemStorageInventory.serializeNBT());
     }
 
     @Override
-    public void load(CompoundTag compound) {
+    public void load(@NotNull CompoundTag compound) {
         super.load(compound);
 
         if (compound.contains(NBT_SELECT_INV)) {
