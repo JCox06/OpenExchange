@@ -25,8 +25,6 @@ public class FilteredStorageUnitScreen extends AbstractContainerScreen<FilteredS
 
     @Override
     protected void renderBg(@NotNull GuiGraphics graphics, float partialTicks, int mouseX, int mouseY) {
-
-
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
 
@@ -36,8 +34,8 @@ public class FilteredStorageUnitScreen extends AbstractContainerScreen<FilteredS
 
     @Override
     public void render(@NotNull GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
-        super.render(graphics, mouseX, mouseY, partialTicks);
-
         this.renderTooltip(graphics, mouseX, mouseY);
+        this.renderBackground(graphics);
+        super.render(graphics, mouseX, mouseY, partialTicks);
     }
 }

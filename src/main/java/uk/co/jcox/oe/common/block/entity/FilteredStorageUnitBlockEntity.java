@@ -41,6 +41,8 @@ public class FilteredStorageUnitBlockEntity extends BlockEntity implements MenuP
 
     public FilteredStorageUnitBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(Registration.TILE_FILTERED_STORAGE_UNIT.get(), blockPos, blockState);
+        this.itemSelectInventory.setStackLimit(1);
+        this.itemSelectInventory.setEnforceCustomLimit(true);
     }
 
 
@@ -80,6 +82,13 @@ public class FilteredStorageUnitBlockEntity extends BlockEntity implements MenuP
     }
 
     @Override
+    public void setRemoved() {
+        super.setRemoved();
+        this.itemSelectInventory.dropContents(level, getBlockPos());
+        this.itemStorageInventory.dropContents(level, getBlockPos());
+    }
+
+    @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
         if (cap == ForgeCapabilities.ITEM_HANDLER) {
 
@@ -95,6 +104,7 @@ public class FilteredStorageUnitBlockEntity extends BlockEntity implements MenuP
 
         return super.getCapability(cap, side);
     }
+
 
 
     @Override

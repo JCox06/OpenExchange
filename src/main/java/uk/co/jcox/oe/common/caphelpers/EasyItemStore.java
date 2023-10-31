@@ -21,10 +21,40 @@ public class EasyItemStore extends ItemStackHandler{
 
     private final Changeable onChange;
 
+    //
+    private int stackLimit = 64;
+    private boolean enforceCustomLimit = false;
+
     public EasyItemStore(@NotNull Predicate<ItemStack> validFunc, Changeable onChange, int size) {
         super(size);
         this.validFunc = validFunc;
         this.onChange = onChange;
+    }
+
+
+    @Override
+    protected int getStackLimit(int slot, @NotNull ItemStack stack) {
+        if (! enforceCustomLimit) {
+            return super.getStackLimit(slot, stack);
+        }
+
+        return stackLimit;
+    }
+
+    public int getStackLimit() {
+        return stackLimit;
+    }
+
+    public boolean isEnforceCustomLimit() {
+        return enforceCustomLimit;
+    }
+
+    public void setStackLimit(int stackLimit) {
+        this.stackLimit = stackLimit;
+    }
+
+    public void setEnforceCustomLimit(boolean enforceCustomLimit) {
+        this.enforceCustomLimit = enforceCustomLimit;
     }
 
     @Override
