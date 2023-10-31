@@ -35,7 +35,7 @@ public class EasyItemStore extends ItemStackHandler{
 
     @Override
     protected final void onContentsChanged(int slot) {
-        this.onChange.invoke();
+        this.onChange.markDirty();
     }
 
 
