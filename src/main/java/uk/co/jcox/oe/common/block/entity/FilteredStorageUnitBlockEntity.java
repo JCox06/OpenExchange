@@ -55,6 +55,11 @@ public class FilteredStorageUnitBlockEntity extends BlockEntity implements MenuP
         compound.put(NBT_STORE_INV, itemStorageInventory.serializeNBT());
     }
 
+
+    public ItemStack getFilteredItem() {
+        return this.itemSelectInventory.getStackInSlot(0);
+    }
+
     @Override
     public void load(@NotNull CompoundTag compound) {
         super.load(compound);

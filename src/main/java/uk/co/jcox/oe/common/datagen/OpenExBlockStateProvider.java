@@ -31,7 +31,7 @@ public class OpenExBlockStateProvider extends BlockStateProvider {
                     .parent(models().getExistingFile(mcLoc("block/orientable")))
                     .texture("front", modLoc("block/" + loc + "_front"))
                     .texture("side", modLoc("block/" + loc + "_side"))
-                    .texture("top", modLoc("block/" + loc + "_top"));
+                    .texture("top", modLoc("block/" + loc + "_side"));
         }));
     }
 

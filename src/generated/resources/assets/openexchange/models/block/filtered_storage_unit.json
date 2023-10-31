@@ -3,6 +3,6 @@
   "textures": {
     "front": "openexchange:block/filtered_storage_unit_front",
     "side": "openexchange:block/filtered_storage_unit_side",
-    "top": "openexchange:block/filtered_storage_unit_top"
+    "top": "openexchange:block/filtered_storage_unit_side"
   }
 }
