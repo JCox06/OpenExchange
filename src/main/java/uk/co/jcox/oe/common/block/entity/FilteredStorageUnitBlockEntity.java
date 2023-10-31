@@ -28,6 +28,8 @@ public class FilteredStorageUnitBlockEntity extends BlockEntity implements MenuP
 
 
     public static final int ITEM_SELECT_INV_SIZE = 1;
+    public static final int ITEM_SELECT_STACK_SIZE = 1;
+
     public static final int ITEM_STORE_INV_SIZE = 45;
 
     public static final String NBT_SELECT_INV = "itemSelectInv";
@@ -41,7 +43,7 @@ public class FilteredStorageUnitBlockEntity extends BlockEntity implements MenuP
 
     public FilteredStorageUnitBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(Registration.TILE_FILTERED_STORAGE_UNIT.get(), blockPos, blockState);
-        this.itemSelectInventory.setStackLimit(1);
+        this.itemSelectInventory.setStackLimit(ITEM_SELECT_STACK_SIZE);
         this.itemSelectInventory.setEnforceCustomLimit(true);
     }
 
