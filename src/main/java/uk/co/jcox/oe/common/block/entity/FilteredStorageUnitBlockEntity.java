@@ -47,29 +47,58 @@ public class FilteredStorageUnitBlockEntity extends BlockEntity implements MenuP
         this.itemSelectInventory.setEnforceCustomLimit(true);
     }
 
-
-    @Override
-    protected void saveAdditional(@NotNull CompoundTag compound) {
-        super.saveAdditional(compound);
-        compound.put(NBT_SELECT_INV, itemSelectInventory.serializeNBT());
-        compound.put(NBT_STORE_INV, itemStorageInventory.serializeNBT());
-    }
-
-
     public ItemStack getFilteredItem() {
         return this.itemSelectInventory.getStackInSlot(0);
     }
 
     @Override
+    protected void saveAdditional(@NotNull CompoundTag compound) {
+        super.saveAdditional(compound);
+        saveInventorySelect(compound);
+        compound.put(NBT_STORE_INV, itemStorageInventory.serializeNBT());
+    }
+
+
+    @Override
     public void load(@NotNull CompoundTag compound) {
         super.load(compound);
 
-        if (compound.contains(NBT_SELECT_INV)) {
-            this.itemSelectInventory.deserializeNBT(compound.getCompound(NBT_SELECT_INV));
-        }
+        loadInventorySelect(compound);
 
         if (compound.contains(NBT_STORE_INV)) {
             this.itemStorageInventory.deserializeNBT(compound.getCompound(NBT_STORE_INV));
+        }
+    }
+
+
+    //This pair of methods is called when a client receives a new chunk it has not seen before
+    //This has to be used, as when the client FIRST joins the world, it needs the item select data
+
+    //Called on the server, prepares data for the client
+    @Override
+    public CompoundTag getUpdateTag() {
+        CompoundTag compound = super.getUpdateTag();
+        saveInventorySelect(compound);
+        return compound;
+    }
+
+
+    //Called on the client, unpacks data sent from the server
+    @Override
+    public void handleUpdateTag(CompoundTag compound) {
+        if (compound != null) {
+            loadInventorySelect(compound);
+        }
+    }
+
+
+    private void saveInventorySelect(@NotNull CompoundTag compound) {
+        compound.put(NBT_SELECT_INV, itemSelectInventory.serializeNBT());
+    }
+
+    private void loadInventorySelect(@NotNull CompoundTag compound) {
+        if (compound.contains(NBT_SELECT_INV)) {
+            this.itemSelectInventory.deserializeNBT(compound.getCompound(NBT_SELECT_INV));
         }
     }
 
@@ -91,6 +120,11 @@ public class FilteredStorageUnitBlockEntity extends BlockEntity implements MenuP
     @Override
     public void setRemoved() {
         super.setRemoved();
+
+    }
+
+
+    public void dropInvContents() {
         this.itemSelectInventory.dropContents(level, getBlockPos());
         this.itemStorageInventory.dropContents(level, getBlockPos());
     }
@@ -114,6 +148,7 @@ public class FilteredStorageUnitBlockEntity extends BlockEntity implements MenuP
 
 
 
+
     @Override
     public @NotNull Component getDisplayName() {
         return Component.translatable(MENU_DISPLAY_COMPONENT);
@@ -124,4 +159,6 @@ public class FilteredStorageUnitBlockEntity extends BlockEntity implements MenuP
     public AbstractContainerMenu createMenu(int winId, @NotNull Inventory inv, @NotNull Player player) {
         return new FilteredStorageUnitContainer(winId, player, getBlockPos());
     }
+
+
 }
