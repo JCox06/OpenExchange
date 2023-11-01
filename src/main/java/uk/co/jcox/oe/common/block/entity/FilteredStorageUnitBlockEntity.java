@@ -35,7 +35,20 @@ public class FilteredStorageUnitBlockEntity extends BlockEntity implements MenuP
     public static final String NBT_SELECT_INV = "itemSelectInv";
     public static final String NBT_STORE_INV = "itemStorageInv";
 
-    private final EasyItemStore itemSelectInventory = new EasyItemStore((ItemStack stack) -> true, this::setChanged, ITEM_SELECT_INV_SIZE);
+    private final EasyItemStore itemSelectInventory = new EasyItemStore((ItemStack stack) -> true, this::setChanged, ITEM_SELECT_INV_SIZE) {
+
+        @Override
+        public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
+            //Once an item is in the select inventory
+            //Lock it in place to prevent accidental removal
+            //The only way to remove this is by breaking the block and replacing
+            if (! getStackInSlot(0).isEmpty()) {
+                return ItemStack.EMPTY;
+            }
+
+            return super.extractItem(slot, amount, simulate);
+        }
+    };
     private final EasyItemStore itemStorageInventory = new EasyItemStore((ItemStack stack) -> stack.is(itemSelectInventory.getStackInSlot(0).getItem()), this::setChanged, ITEM_STORE_INV_SIZE);
 
     private final LazyOptional<IItemHandler> itemSelectItemHandler = LazyOptional.of(() -> itemSelectInventory);
@@ -117,11 +130,6 @@ public class FilteredStorageUnitBlockEntity extends BlockEntity implements MenuP
         return itemStorageInventory;
     }
 
-    @Override
-    public void setRemoved() {
-        super.setRemoved();
-
-    }
 
 
     public void dropInvContents() {
@@ -159,6 +167,4 @@ public class FilteredStorageUnitBlockEntity extends BlockEntity implements MenuP
     public AbstractContainerMenu createMenu(int winId, @NotNull Inventory inv, @NotNull Player player) {
         return new FilteredStorageUnitContainer(winId, player, getBlockPos());
     }
-
-
 }
