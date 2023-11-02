@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "key": {
+    "#": {
+      "item": "minecraft:iron_ingot"
+    },
+    "A": {
+      "item": "minecraft:chest"
+    },
+    "B": {
+      "item": "openexchange:item_filter"
+    }
+  },
+  "pattern": [
+    "###",
+    "#A#",
+    "#B#"
+  ],
+  "result": {
+    "item": "openexchange:filtered_storage_unit"
+  },
+  "show_notification": true
+}
