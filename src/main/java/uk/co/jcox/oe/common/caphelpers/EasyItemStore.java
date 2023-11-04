@@ -5,7 +5,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -80,19 +79,4 @@ public class EasyItemStore extends ItemStackHandler{
         }
     }
 
-
-    @NotNull
-    public static CombinedInvWrapper observableMerged(@NotNull ItemStackHandler ...handler) {
-        return new CombinedInvWrapper(handler) {
-            @Override
-            public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
-                return ItemStack.EMPTY;
-            }
-
-            @Override
-            public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
-                return stack;
-            }
-        };
-    }
 }

@@ -11,6 +11,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -79,5 +81,19 @@ public class FilteredStorageUnitBlock extends Block implements EntityBlock {
         }
 
         super.onRemove(state, level, pos, newState, p_60519_);
+    }
+
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState p_153213_, BlockEntityType<T> p_153214_) {
+       if (! level.isClientSide) {
+           return (lvl, pos, stt, te) -> {
+               if (te instanceof FilteredStorageUnitBlockEntity entity) {
+                   entity.tickServer();
+               }
+           };
+       }
+       return null;
     }
 }

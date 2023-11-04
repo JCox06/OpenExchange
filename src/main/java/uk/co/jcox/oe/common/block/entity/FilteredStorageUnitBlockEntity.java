@@ -19,6 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import uk.co.jcox.oe.OpenExchange;
 import uk.co.jcox.oe.common.caphelpers.EasyItemStore;
+import uk.co.jcox.oe.common.caphelpers.ItemCapUtils;
 import uk.co.jcox.oe.common.container.FilteredStorageUnitContainer;
 import uk.co.jcox.oe.common.setup.Registration;
 
@@ -59,6 +60,30 @@ public class FilteredStorageUnitBlockEntity extends BlockEntity implements MenuP
         this.itemSelectInventory.setStackLimit(ITEM_SELECT_STACK_SIZE);
         this.itemSelectInventory.setEnforceCustomLimit(true);
     }
+
+
+    public void tickServer() {
+        if (level.getGameTime() % 8 != 0) {
+            return;
+        }
+
+        if (level.getBlockEntity(getBlockPos().below()) instanceof FilteredStorageUnitBlockEntity entity) {
+
+            if (this.itemSelectInventory.getStackInSlot(0).is(entity.itemSelectInventory.getStackInSlot(0).getItem())) {
+                entity.getCapability(ForgeCapabilities.ITEM_HANDLER, Direction.UP).map(handler -> {
+                    int nextIndex = ItemCapUtils.getNextItemIndex(itemStorageInventory, 0);
+                    if (nextIndex == -1) {
+                        return false;
+                    }
+                    ItemStack toTransfer = itemStorageInventory.getStackInSlot(nextIndex);
+                    ItemCapUtils.attemptItemTransfer(handler, toTransfer);
+                    return true;
+                });
+            }
+        }
+    }
+
+
 
     public ItemStack getFilteredItem() {
         return this.itemSelectInventory.getStackInSlot(0);
