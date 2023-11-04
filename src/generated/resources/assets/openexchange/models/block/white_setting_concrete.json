@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "openexchange:block/white_setting_concrete"
+  }
+}

@@ -1,3 +1,7 @@
-// 1.20.1	2023-10-31T21:48:58.823614	Block States: openexchange
+// 1.20.1	2023-11-04T18:44:19.6842954	Block States: openexchange
 dbfab215c82906e258c4e3f89581065800cef2d8 assets/openexchange/blockstates/filtered_storage_unit.json
+af771299220329944ee31a991cc72f3989ba561c assets/openexchange/blockstates/white_concrete.json
+e975c3e25f3a4d16fdf1db00807e67dbd21622ae assets/openexchange/blockstates/white_setting_concrete.json
 9d84a6b4e3ec092e0d7121c2b79bbdcce5dded64 assets/openexchange/models/block/filtered_storage_unit.json
+08953e9a47fe9fe7f37e4e9ce55b2f6d45b7f849 assets/openexchange/models/block/white_concrete.json
+f188acd14b2de66814524085c2962cb5368a9176 assets/openexchange/models/block/white_setting_concrete.json

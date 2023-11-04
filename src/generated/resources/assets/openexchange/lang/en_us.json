@@ -1,5 +1,7 @@
 {
   "block.openexchange.filtered_storage_unit": "Filtered Storage Unit",
+  "block.openexchange.white_concrete": "White Concrete",
+  "block.openexchange.white_setting_concrete": "White Setting Concrete",
   "inventory.openexchange.main_menu": "OpenEX",
   "item.openexchange.ipu_fast": "Fast IPU",
   "item.openexchange.ipu_standard": "Standard IPU",

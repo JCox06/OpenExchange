@@ -7,6 +7,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;
 import uk.co.jcox.oe.common.setup.Registration;
 
@@ -30,6 +31,19 @@ public class OpenExRecipeProvider extends RecipeProvider {
                 .define('B', Items.CHEST)
                 .define('A', Registration.ITEM_ITEM_FILTER.get())
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Registration.ITEM_ITEM_FILTER.get()));
+
+        builder.save(writer);
+
+
+        builder = ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, Registration.BLOCK_WHITE_SETTING_CONCRETE.get())
+                .pattern("#A#")
+                .pattern("ABA")
+                .pattern("#C#")
+                .define('#', Blocks.SAND)
+                .define('A', Items.CLAY_BALL)
+                .define('B', Blocks.OBSIDIAN)
+                .define('C', Blocks.WATER)
+                        .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.OBSIDIAN));
 
         builder.save(writer);
     }

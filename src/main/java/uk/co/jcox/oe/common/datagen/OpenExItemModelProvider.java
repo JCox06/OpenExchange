@@ -24,6 +24,8 @@ public class OpenExItemModelProvider extends ItemModelProvider {
 
         //Block Items
         blockParent(Registration.ITEM_FILTERED_STORAGE_UNIT);
+        blockParent(Registration.ITEM_WHITE_SETTING_CONCRETE);
+        blockParent(Registration.ITEM_WHITE_CONCRETE);
     }
 
 

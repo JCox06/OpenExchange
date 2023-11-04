@@ -8,6 +8,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -18,6 +19,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import uk.co.jcox.oe.OpenExchange;
 import uk.co.jcox.oe.common.block.FilteredStorageUnitBlock;
+import uk.co.jcox.oe.common.block.SettingConcreteBlock;
 import uk.co.jcox.oe.common.block.entity.FilteredStorageUnitBlockEntity;
 import uk.co.jcox.oe.common.container.FilteredStorageUnitContainer;
 import uk.co.jcox.oe.common.datagen.DataGeneration;
@@ -70,6 +72,14 @@ public class Registration {
             IForgeMenuType.create(((windowId, inv, data) -> new FilteredStorageUnitContainer(windowId, inv.player, data.readBlockPos()))));
 
 
+    //Concrete
+    public static final RegistryObject<Block> BLOCK_WHITE_SETTING_CONCRETE = BLOCKS.register("white_setting_concrete", () -> new SettingConcreteBlock(BlockBehaviour.Properties.of().sound(SoundType.WET_GRASS).strength(0.05f).randomTicks()));
+    public static final RegistryObject<Item> ITEM_WHITE_SETTING_CONCRETE = ITEMS.register("white_setting_concrete", () -> new BlockItem(BLOCK_WHITE_SETTING_CONCRETE.get(), new Item.Properties()));
+
+
+    public static final RegistryObject<Block> BLOCK_WHITE_CONCRETE = BLOCKS.register("white_concrete", () -> new Block(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN).strength(250.0f, 1200.0f)));
+    public static final RegistryObject<Item> ITEM_WHITE_CONCRETE = ITEMS.register("white_concrete", () -> new BlockItem(BLOCK_WHITE_CONCRETE.get(), new Item.Properties()));
+
     //Creative Menu Screen
     public static final String TITLE_MAIN_MENU = "inventory." + OpenExchange.MODID + ".main_menu";
     private static final RegistryObject<CreativeModeTab> MAIN_MENU = CREATIVE_TABS.register("main_menu", () ->
@@ -81,6 +91,7 @@ public class Registration {
                         out.accept(new ItemStack(ITEM_IPU_STANDARD.get()));
                         out.accept(new ItemStack(ITEM_IPU_FAST.get()));
                         out.accept(new ItemStack(ITEM_FILTERED_STORAGE_UNIT.get()));
+                        out.accept(new ItemStack(ITEM_WHITE_SETTING_CONCRETE.get()));
                     })
                     .build());
 }

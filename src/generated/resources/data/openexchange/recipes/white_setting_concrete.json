@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "minecraft:sand"
+    },
+    "A": {
+      "item": "minecraft:clay_ball"
+    },
+    "B": {
+      "item": "minecraft:obsidian"
+    },
+    "C": []
+  },
+  "pattern": [
+    "#A#",
+    "ABA",
+    "#C#"
+  ],
+  "result": {
+    "item": "openexchange:white_setting_concrete"
+  },
+  "show_notification": true
+}

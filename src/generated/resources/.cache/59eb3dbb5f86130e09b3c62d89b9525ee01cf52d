@@ -1,2 +1,4 @@
-// 1.20.1	2023-11-02T16:49:48.7923071	Loot Tables
+// 1.20.1	2023-11-04T18:44:19.6853011	Loot Tables
 a7adfc801da978ad7616156842757c3f7bb67a6b data/openexchange/loot_tables/blocks/filtered_storage_unit.json
+a93c9b57eea0341462960e6229ba27c734dedaf2 data/openexchange/loot_tables/blocks/white_concrete.json
+dfac69bca5d921eb6bc268e87d491cc272bc81b2 data/openexchange/loot_tables/blocks/white_setting_concrete.json

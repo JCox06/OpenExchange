@@ -1,3 +1,4 @@
-// 1.20.1	2023-11-02T16:49:48.794309	Tags for minecraft:block mod id openexchange
-8c3d3ec2919d591ca66d7484cc8e2e020c0b0ba2 data/minecraft/tags/blocks/mineable/pickaxe.json
+// 1.20.1	2023-11-04T19:01:28.9287476	Tags for minecraft:block mod id openexchange
+45918623bafc2a2f4f51ed0277e7fa6155dc0d5f data/forge/tags/blocks/needs_netherite_tool.json
+454fb7976d9c952da40366ad5864c3f549103545 data/minecraft/tags/blocks/mineable/pickaxe.json
 8c3d3ec2919d591ca66d7484cc8e2e020c0b0ba2 data/minecraft/tags/blocks/needs_iron_tool.json

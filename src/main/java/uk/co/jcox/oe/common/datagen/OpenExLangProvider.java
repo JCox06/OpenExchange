@@ -29,5 +29,8 @@ public class OpenExLangProvider extends LanguageProvider {
         add(Registration.ITEM_ITEM_FILTER.get(), "Item Filter");
         add(Registration.ITEM_FILTERED_STORAGE_UNIT.get(), "Filtered Storage Unit");
 
+        //Blocks
+        add(Registration.BLOCK_WHITE_SETTING_CONCRETE.get(), "White Setting Concrete");
+        add(Registration.BLOCK_WHITE_CONCRETE.get(), "White Concrete");
     }
 }

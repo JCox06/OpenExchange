@@ -1,5 +1,7 @@
-// 1.20.1	2023-10-25T20:00:55.7148882	Item Models: openexchange
+// 1.20.1	2023-11-04T18:44:19.6873027	Item Models: openexchange
 7a20fc41f1f0a0d9a96c9cc3e45671f9a23eed52 assets/openexchange/models/item/filtered_storage_unit.json
 d9e7817dbdf50d21c52dda8788895892d25c2702 assets/openexchange/models/item/ipu_fast.json
 6affcf003cd659eeb4ca830838e3dcb5f3e19b2f assets/openexchange/models/item/ipu_standard.json
 29f9bac35b4acf1d0383172f757bd0185e450023 assets/openexchange/models/item/item_filter.json
+1a67a04339ef0529ff44481370a2fdc78a742ab8 assets/openexchange/models/item/white_concrete.json
+3a97d52564547f3351d2c68240ac7ae1632bb8ab assets/openexchange/models/item/white_setting_concrete.json

@@ -33,6 +33,9 @@ public class OpenExBlockStateProvider extends BlockStateProvider {
                     .texture("side", modLoc("block/" + loc + "_side"))
                     .texture("top", modLoc("block/" + loc + "_side"));
         }));
+
+        simpleBlock(Registration.BLOCK_WHITE_SETTING_CONCRETE.get());
+        simpleBlock(Registration.BLOCK_WHITE_CONCRETE.get());
     }
 
 

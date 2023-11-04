@@ -53,7 +53,7 @@ public class FilteredStorageUnitBlock extends Block implements EntityBlock {
     }
 
 
-    @SuppressWarnings("deprecated")
+    @SuppressWarnings("deprecation")
     @Override
     public @NotNull InteractionResult use(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult result) {
 
@@ -72,7 +72,7 @@ public class FilteredStorageUnitBlock extends Block implements EntityBlock {
         return InteractionResult.SUCCESS;
     }
 
-    @SuppressWarnings("deprecated")
+    @SuppressWarnings("deprecation")
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean p_60519_) {
 

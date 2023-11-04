@@ -6,10 +6,10 @@
       "item": "minecraft:iron_ingot"
     },
     "A": {
-      "item": "minecraft:chest"
+      "item": "openexchange:item_filter"
     },
     "B": {
-      "item": "openexchange:item_filter"
+      "item": "minecraft:chest"
     }
   },
   "pattern": [

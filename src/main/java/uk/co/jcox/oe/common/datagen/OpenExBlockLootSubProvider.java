@@ -15,6 +15,8 @@ public class OpenExBlockLootSubProvider extends VanillaBlockLoot {
     @Override
     protected void generate() {
         this.dropSelf(Registration.BLOCK_FILTERED_STORAGE_UNIT.get());
+        this.dropSelf(Registration.BLOCK_WHITE_SETTING_CONCRETE.get());
+        this.dropSelf(Registration.BLOCK_WHITE_CONCRETE.get());
     }
 
     @Override
