@@ -77,6 +77,11 @@ public class ItemCapUtils {
             return false;
         }
 
+        //If the itemStack is not valid in this container in this index, stop
+        if (! handler.isItemValid(nextIndex, stack)) {
+            return false;
+        }
+
         handler.insertItem(nextIndex, new ItemStack(stack.getItem()), false);
         stack.shrink(1);
         return true;

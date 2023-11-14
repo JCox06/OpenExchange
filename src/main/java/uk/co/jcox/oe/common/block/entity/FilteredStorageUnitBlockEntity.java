@@ -67,20 +67,22 @@ public class FilteredStorageUnitBlockEntity extends BlockEntity implements MenuP
             return;
         }
 
-        if (level.getBlockEntity(getBlockPos().below()) instanceof FilteredStorageUnitBlockEntity entity) {
+        BlockEntity below = level.getBlockEntity(getBlockPos().below());
 
-            if (this.itemSelectInventory.getStackInSlot(0).is(entity.itemSelectInventory.getStackInSlot(0).getItem())) {
-                entity.getCapability(ForgeCapabilities.ITEM_HANDLER, Direction.UP).map(handler -> {
-                    int nextIndex = ItemCapUtils.getNextItemIndex(itemStorageInventory, 0);
-                    if (nextIndex == -1) {
-                        return false;
-                    }
-                    ItemStack toTransfer = itemStorageInventory.getStackInSlot(nextIndex);
-                    ItemCapUtils.attemptItemTransfer(handler, toTransfer);
-                    return true;
-                });
-            }
+        if (below == null) {
+            return;
         }
+
+        below.getCapability(ForgeCapabilities.ITEM_HANDLER, Direction.UP).map(handler -> {
+            int nextIndex = ItemCapUtils.getNextItemIndex(itemStorageInventory, 0);
+            if (nextIndex == -1) {
+                return false;
+            }
+
+            ItemStack toTransfer = itemStorageInventory.getStackInSlot(nextIndex);
+            ItemCapUtils.attemptItemTransfer(handler, toTransfer);
+            return true;
+        });
     }
 
 
