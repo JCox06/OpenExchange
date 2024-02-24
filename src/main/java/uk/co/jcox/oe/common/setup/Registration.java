@@ -28,13 +28,9 @@ import uk.co.jcox.oe.common.item.ItemProcessingUnit;
 public class Registration {
 
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, OpenExchange.MODID);
-
     private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, OpenExchange.MODID);
-
     private static final DeferredRegister<BlockEntityType<?>> TILES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, OpenExchange.MODID);
-
     private static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, OpenExchange.MODID);
-
     private static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, OpenExchange.MODID);
 
     public static void registerAll(IEventBus modEventBus) {
@@ -62,7 +58,7 @@ public class Registration {
 
 
     //Filtered Storage Unit
-    public static final RegistryObject<Block> BLOCK_FILTERED_STORAGE_UNIT = BLOCKS.register("filtered_storage_unit", () -> new FilteredStorageUnitBlock(BlockBehaviour.Properties.of().sound(SoundType.METAL).strength(1.5f, 8.0f).requiresCorrectToolForDrops()));
+    public static final RegistryObject<Block> BLOCK_FILTERED_STORAGE_UNIT = BLOCKS.register("filtered_storage_unit", () -> new FilteredStorageUnitBlock(BlockBehaviour.Properties.of().sound(SoundType.METAL).strength(1.5f, 8.0f).requiresCorrectToolForDrops().lightLevel((a) -> 8)));
     public static final RegistryObject<Item> ITEM_FILTERED_STORAGE_UNIT = ITEMS.register("filtered_storage_unit", () -> new BlockItem(BLOCK_FILTERED_STORAGE_UNIT.get(), new Item.Properties()));
 
     public static final RegistryObject<BlockEntityType<FilteredStorageUnitBlockEntity>> TILE_FILTERED_STORAGE_UNIT = TILES.register("filtered_stroage_unit", () ->

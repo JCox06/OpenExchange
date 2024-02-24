@@ -1,6 +1,8 @@
 package uk.co.jcox.oe.common.setup;
 
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.resources.model.ModelBaker;
+import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -25,4 +27,5 @@ public class ClientSetup {
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers registryEvent) {
         registryEvent.registerBlockEntityRenderer(Registration.TILE_FILTERED_STORAGE_UNIT.get(), FilteredStorageUnitBlockEntityRenderer::new);
     }
+
 }
