@@ -33,11 +33,11 @@ public class FilteredStorageUnitBlockEntityRenderer implements BlockEntityRender
         pose.pushPose();
         pose.translate(0.5f, 0.5f, 0.5f); //Translate to centre
         pose.translate(-0.5f * direction.getStepX(), 0.0f, -0.5f * direction.getStepZ());
-
-        pose.mulPose(new Quaternionf().rotateY( -(float)Math.toRadians(direction.toYRot())));
-
-        pose.scale(0.6f, 0.6f, 0.6f);
-
+//
+//        pose.mulPose(new Quaternionf().rotateY( -(float)Math.toRadians(direction.toYRot())));
+//
+//        pose.scale(0.6f, 0.6f, 0.6f);
+//
         this.itemDispatcher.renderStatic(filteredItem, ItemDisplayContext.FIXED, 15728850, OverlayTexture.NO_OVERLAY, pose, buffers, entity.getLevel(), (int) entity.getBlockPos().asLong());
         pose.popPose();
 

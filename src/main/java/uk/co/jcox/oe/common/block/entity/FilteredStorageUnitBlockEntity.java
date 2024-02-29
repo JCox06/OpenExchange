@@ -3,14 +3,23 @@ package uk.co.jcox.oe.common.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.client.model.data.ModelData;
+import net.minecraftforge.client.model.data.ModelDataManager;
+import net.minecraftforge.client.model.data.ModelProperty;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -36,7 +45,13 @@ public class FilteredStorageUnitBlockEntity extends BlockEntity implements MenuP
     public static final String NBT_SELECT_INV = "itemSelectInv";
     public static final String NBT_STORE_INV = "itemStorageInv";
 
-    private final EasyItemStore itemSelectInventory = new EasyItemStore((ItemStack stack) -> true, this::setChanged, ITEM_SELECT_INV_SIZE) {
+    //Model property for baked model
+    public static final ModelProperty<Item> FILTER = new ModelProperty<>();
+
+    private final EasyItemStore itemSelectInventory = new EasyItemStore((ItemStack stack) -> true, () -> {
+        this.setChanged();
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
+    }, ITEM_SELECT_INV_SIZE) {
 
         @Override
         public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
@@ -46,7 +61,6 @@ public class FilteredStorageUnitBlockEntity extends BlockEntity implements MenuP
             if (! getStackInSlot(0).isEmpty()) {
                 return ItemStack.EMPTY;
             }
-
             return super.extractItem(slot, amount, simulate);
         }
     };
@@ -132,6 +146,23 @@ public class FilteredStorageUnitBlockEntity extends BlockEntity implements MenuP
     }
 
 
+    //Following pair of methods will be called during a block update
+
+
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        CompoundTag compound = pkt.getTag();
+        handleUpdateTag(compound);
+        requestModelDataUpdate();
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
+    }
+
     private void saveInventorySelect(@NotNull CompoundTag compound) {
         compound.put(NBT_SELECT_INV, itemSelectInventory.serializeNBT());
     }
@@ -158,6 +189,12 @@ public class FilteredStorageUnitBlockEntity extends BlockEntity implements MenuP
     }
 
 
+    @Override
+    public @NotNull ModelData getModelData() {
+        return ModelData.builder()
+                .with(FILTER, itemSelectInventory.getStackInSlot(0).getItem())
+                .build();
+    }
 
     public void dropInvContents() {
         this.itemSelectInventory.dropContents(level, getBlockPos());
